@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div>
+      <button type="number" id="rd">Red</button>
+      <p id="rdc">0</p>
+    </div>
+    <div>
+      <button type="number" id="gd">Green</button>
+      <p id="gdc">0</p>
+    </div>
+
+    <div>
+      <button type="number" id="bd">Blue</button>
+      <p id="bdc">0</p>
+    </div>
+    <div>
+      <button type="button" id="stop">Stop Count</button>
+    </div>
+    <p id="totalc">0</p>
+    <div>
+      <button type="button" id="rh">Refresh</button>
+    </div>
+    <p>Winner: <span id="winner"> None </span></p>
+    <script>
+      const rdc = document.getElementById("rdc");
+      const rd = document.getElementById("rd");
+      const gd = document.getElementById("gd");
+      const gdc = document.getElementById("gdc");
+      const bd = document.getElementById("bd");
+      const bdc = document.getElementById("bdc");
+      const totalc = document.getElementById("totalc");
+      const rh = document.getElementById("rh");
+      const winner = document.getElementById("winner");
+
+      let red = 0;
+      let green = 0;
+      let blue = 0;
+      let totalClicks = 0;
+
+      rd.addEventListener("click", () => {
+        red++;
+        totalClicks++;
+        rdc.textContent = red;
+        totalc.textContent = totalClicks;
+        checkWinner();
+      });
+
+      gd.addEventListener("click", () => {
+        green++;
+        totalClicks++;
+        gdc.textContent = green;
+        totalc.textContent = totalClicks;
+        checkWinner();
+      });
+
+      bd.addEventListener("click", () => {
+        blue++;
+        totalClicks++;
+        bdc.textContent = blue;
+        totalc.textContent = totalClicks;
+        checkWinner();
+      });
+
+    //   const stopButton = document.getElementById("stop");
+
+    //   stopButton.addEventListener("click", () => {
+    //     stopCountAndDisplayWinner();
+    //   });   
+
+      rh.addEventListener("click", () => {
+        red = 0;
+        green = 0;
+        blue = 0;
+        totalClicks = 0;
+
+        rdc.textContent = "0";
+        gdc.textContent = "0";
+        bdc.textContent = "0";
+        totalc.textContent = "0";
+        winner.textContent = "None";
+        enable();
+      });
+
+      
+
+    //   function stopCountAndDisplayWinner() {
+    //     disable(); // Disable the color buttons
+    //     const winnerName = GetWinner();
+    //     winner.textContent = winnerName;
+    //   }
+
+      function checkWinner() {
+        if (totalClicks >= 30) {
+          disable();
+          const winne = GetWinner();
+          winner.textContent = winne;
+        }
+      }
+
+      function GetWinner() {
+        if (red > green && red > blue) {
+          return "Red";
+        } else if (green > red && green > blue) {
+          return "Green";
+        } else if (blue > red && blue > green) {
+          return "Blue";
+        } else if (red === green || red === blue || green === blue) {
+          return "Both Are Winners";
+        } else {
+          return "None";
+        }
+      }
+
+      function disable() {
+        rd.disabled = true;
+        gd.disabled = true;
+        bd.disabled = true;
+      }
+
+      function enable() {
+        rd.disabled = false;
+        gd.disabled = false;
+        bd.disabled = false;
+      }
+    </script>
+  </body>
+</html>
